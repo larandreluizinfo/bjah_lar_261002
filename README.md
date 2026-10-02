@@ -21,6 +21,19 @@ Você controla o **time azul**; o time vermelho joga com IA.
 
 Troque de local no botão **🏟️**, nas abas do placar ou com a tecla <kbd>E</kbd>.
 
+## Dificuldade
+
+| Modo | Como funciona |
+| --- | --- |
+| 😊 **Fácil** | Tem **100 níveis**. A IA evolui do nível 1 ao 100: velocidade dos jogadores e do goleiro, precisão do chute e do passe, agressividade na marcação, alcance da finalização e tempo de decisão. |
+| 😎 **Normal** | Equilibrado, sem progressão. |
+| 😈 **Difícil** | IA rápida, goleiro forte e muita pressão. |
+
+- Escolha no menu inicial, pelo botão 😊 do placar ou com <kbd>F</kbd> / <kbd>N</kbd> / <kbd>D</kbd>.
+- No modo Fácil use o **slider de nível (1–100)**, os botões **+ / − / ↺** ou as teclas <kbd>F</kbd> e depois o slider.
+- **Ganhar sobe um nível; perder desce um; empate mantém.** O nível fica salvo no navegador (`localStorage`).
+- Medição em 6 partidas simuladas com o jogador parado: nível 25 → 0,8 gols da IA por jogo; nível 50 → 1,3; nível 75 → 1,8.
+
 ## Controles
 
 | Tecla | Ação |
@@ -30,6 +43,7 @@ Troque de local no botão **🏟️**, nas abas do placar ou com a tecla <kbd>E<
 | <kbd>Shift</kbd> | carrinho (desarme) |
 | <kbd>Q</kbd> | trocar de jogador |
 | <kbd>E</kbd> | trocar de local |
+| <kbd>F</kbd> / <kbd>N</kbd> / <kbd>D</kbd> | fácil / normal / difícil |
 | <kbd>R</kbd> | reiniciar a partida |
 
 No celular aparece um joystick virtual e os botões de chute e carrinho.

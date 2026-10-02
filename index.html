@@ -33,6 +33,8 @@
       </div>
 
       <div class="tools">
+        <button class="tool" id="btnMode" type="button" title="Número de jogadores">👥 <span id="modeName">1 jogador</span></button>
+        <button class="tool" id="btnDiff" type="button" title="Dificuldade">😊 <span id="diffName">Fácil</span></button>
         <button class="tool" id="btnVenue" type="button" title="Trocar de local">🏟️ <span id="venueName">Campo</span></button>
         <button class="tool is-off" id="btnSound" type="button" title="Som">🔇</button>
       </div>
@@ -48,6 +50,26 @@
           <div class="venues" role="group" aria-label="Escolher praça">
             <button class="venue is-active" type="button" data-venue="campo">🏟️ Campo<small>Grama</small></button>
             <button class="venue" type="button" data-venue="quadra">🏀 Quadra<small>Futsal</small></button>
+          </div>
+          <div class="venues" role="group" aria-label="Dificuldade">
+            <button class="venue diff is-active" type="button" data-diff="facil">😊 Fácil<small>1–100 níveis</small></button>
+            <button class="venue diff" type="button" data-diff="normal">😎 Normal<small>Equilibrado</small></button>
+            <button class="venue diff" type="button" data-diff="dificil">😈 Difícil<small>Contra-ataque</small></button>
+          </div>
+          <div class="levelbox" id="levelBox">
+            <div class="levelbox__top">
+              <span class="levelbox__label">Nível <output id="lvlOut">1</output>/100</span>
+              <span class="levelbox__btns">
+                <button class="tool" id="lvlDown" type="button" title="Diminuir">−</button>
+                <button class="tool" id="lvlUp" type="button" title="Aumentar">+</button>
+                <button class="tool" id="lvlReset" type="button" title="Voltar ao 1">↺</button>
+              </span>
+            </div>
+            <input type="range" id="lvlRange" min="1" max="100" step="1" value="1" aria-label="Nível de 1 a 100">
+          </div>
+          <div class="venues" role="group" aria-label="Jogadores">
+            <button class="venue mode is-active" type="button" data-mode="1p">👤 1 jogador<small>Você vs IA</small></button>
+            <button class="venue mode" type="button" data-mode="2p">👥 2 jogadores<small>Mesmo teclado</small></button>
           </div>
           <button id="btnPlay" class="btn" type="button">Jogar</button>
           <button id="btnCustom" class="btn btn--ghost btn--wide" type="button">🎨 Cores do time</button>
@@ -105,11 +127,20 @@
       <span><kbd>Shift</kbd> carrinho</span>
       <span><kbd>Q</kbd> trocar jogador</span>
       <span><kbd>E</kbd> trocar local</span>
+      <span><kbd>V</kbd> 1 ou 2 jogadores</span>
+      <span><kbd>F</kbd><kbd>N</kbd><kbd>D</kbd> dificuldade</span>
       <span><kbd>R</kbd> reiniciar</span>
+    </footer>
+
+    <footer class="versus-hint" id="versusHint" hidden>
+      <strong>👥 Modo Versus:</strong>
+      <span class="p1">Jogador 1 (azul): <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> · <kbd>Espaço</kbd> chute · <kbd>Shift</kbd> carrinho · <kbd>Q</kbd> trocar</span>
+      <span class="p2">Jogador 2 (vermelho): <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> · <kbd>/</kbd> ou <kbd>.</kbd> chute · <kbd>Shift</kbd> direito carrinho · <kbd>,</kbd> trocar</span>
     </footer>
 
     <footer class="credits">
       <span id="arenaName">Campo · grama</span>
+      · Dificuldade <strong id="diffInline">Fácil · Nv 1</strong>
       · Criado por <strong>Bernardo</strong>, <strong>Helena</strong>, <strong>Arthur</strong> e <strong>João</strong>
       · <a href="https://larandreluizinfo.github.io/bjah_lar_261002/">jogar no site</a>
       · <a href="https://github.com/larandreluizinfo/bjah_lar_261002">código</a>

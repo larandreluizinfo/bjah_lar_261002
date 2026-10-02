@@ -82,6 +82,27 @@ body {
 .tool:hover { border-color: var(--accent); }
 .tool.is-off { opacity: 0.5; }
 
+.levelbox {
+  margin: 0 0 14px; padding: 10px 12px;
+  background: #0d1729; border: 1px solid var(--line); border-radius: 12px;
+  text-align: left;
+}
+.levelbox[hidden] { display: none; }
+.levelbox__top {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px; margin-bottom: 8px;
+}
+.levelbox__label {
+  font-size: 0.78rem; font-weight: 700; color: var(--gold);
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.levelbox__label output { font-size: 1rem; color: var(--text); }
+.levelbox__btns { display: flex; gap: 6px; }
+.levelbox__btns .tool { padding: 3px 10px; font-size: 0.9rem; line-height: 1.2; }
+.levelbox input[type="range"] {
+  width: 100%; accent-color: var(--gold); cursor: pointer;
+}
+
 .closet {
   margin-top: 12px; padding: 14px;
   background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
@@ -149,6 +170,27 @@ canvas { display: block; width: 100%; height: auto; }
 }
 .venue small { font-size: 0.62rem; font-weight: 600; color: var(--muted); text-transform: uppercase; }
 .venue.is-active { border-color: var(--accent); background: #10233c; box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.18); }
+.venue.diff.is-active { border-color: var(--gold); background: #2a1f06; box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.2); }
+.venue.mode.is-active { border-color: var(--home); background: #0f1c33; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.22); }
+
+.versus-hint {
+  display: flex; flex-direction: column; gap: 4px;
+  margin-top: 10px; padding: 10px 12px;
+  background: rgba(17, 27, 46, 0.9); border: 1px solid var(--line);
+  border-radius: 12px; font-size: 0.78rem; color: var(--muted);
+}
+.versus-hint[hidden] { display: none; }
+.versus-hint .p1 { color: #bfdbfe; }
+.versus-hint .p2 { color: #fecdd3; }
+.versus-hint strong { color: var(--text); }
+
+.levelbox { margin: 0 0 14px; }
+.levelbox[hidden] { display: none; }
+.levelbox__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.levelbox__label { font-size: 0.78rem; font-weight: 700; color: var(--gold); }
+.levelbox__label output { font-size: 1rem; }
+.levelbox__btns { display: flex; gap: 6px; }
+.levelbox input[type="range"] { width: 100%; accent-color: var(--gold); cursor: pointer; }
 
 .btn {
   appearance: none; border: 0; cursor: pointer;
