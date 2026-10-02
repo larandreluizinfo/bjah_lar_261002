@@ -2,30 +2,120 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>bjah_lar_261002</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-      background: #0d1117;
-      color: #e6edf3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      text-align: center;
-    }
-    main { padding: 2rem; }
-    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    p { color: #8b949e; }
-    a { color: #58a6ff; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Futebol de Rua — Campo &amp; Quadra</title>
+  <meta name="description" content="Jogo de futebol arcade com campo de grama e quadra de futsal. Bernardo, Helena, Arthur e João.">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <main>
-    <h1>bjah_lar_261002</h1>
-    <p>Página publicada com GitHub Pages.</p>
-  </main>
+  <div class="app">
+    <header class="topbar">
+      <h1 class="title">⚽ Futebol de Rua</h1>
+
+      <div class="arenas" role="group" aria-label="Escolher praça">
+        <button class="arena is-active" type="button" data-venue="campo">🌿 Campo</button>
+        <button class="arena" type="button" data-venue="quadra">🏀 Quadra</button>
+      </div>
+
+      <div class="scoreboard">
+        <div class="team team--home">
+          <span class="team__name">Azul</span>
+          <span class="team__goals" id="goalsHome">0</span>
+        </div>
+        <div class="clock">
+          <span id="clock">1:30</span>
+          <small id="half">1º tempo</small>
+        </div>
+        <div class="team team--away">
+          <span class="team__goals" id="goalsAway">0</span>
+          <span class="team__name">Vermelho</span>
+        </div>
+      </div>
+
+      <div class="tools">
+        <button class="tool" id="btnVenue" type="button" title="Trocar de local">🏟️ <span id="venueName">Campo</span></button>
+        <button class="tool is-off" id="btnSound" type="button" title="Som">🔇</button>
+      </div>
+    </header>
+
+    <main class="stage">
+      <canvas id="game" width="960" height="560"></canvas>
+
+      <div class="overlay" id="overlay">
+        <div class="overlay__card">
+          <h2 id="overlayTitle">Futebol de Rua</h2>
+          <p id="overlayText">2 tempos de 45s. Você controla o time azul.</p>
+          <div class="venues" role="group" aria-label="Escolher praça">
+            <button class="venue is-active" type="button" data-venue="campo">🏟️ Campo<small>Grama</small></button>
+            <button class="venue" type="button" data-venue="quadra">🏀 Quadra<small>Futsal</small></button>
+          </div>
+          <button id="btnPlay" class="btn" type="button">Jogar</button>
+          <button id="btnCustom" class="btn btn--ghost btn--wide" type="button">🎨 Cores do time</button>
+        </div>
+      </div>
+
+      <div class="touch" id="touch" hidden>
+        <div class="pad" id="pad"><div class="pad__knob" id="knob"></div></div>
+        <div class="buttons">
+          <button class="btn btn--ghost" id="btnSlide" type="button">🛝<small>Carrinho</small></button>
+          <button class="btn btn--kick" id="btnKick" type="button">⚽<small>Chute</small></button>
+        </div>
+      </div>
+    </main>
+
+    <section class="closet" id="closet" hidden>
+      <div class="closet__head">
+        <strong>🎨 Closet — cores do mundo</strong>
+        <button class="tool" id="btnCloseCloset" type="button">Fechar</button>
+      </div>
+      <div class="closet__grid">
+        <label class="field"><span>Time</span>
+          <select id="kitTeam">
+            <option value="1">Azul (você)</option>
+            <option value="2">Vermelho (IA)</option>
+          </select>
+        </label>
+        <label class="field"><span>Camisa</span><input type="color" id="kitShirt" value="#2f6fe0"></label>
+        <label class="field"><span>Detalhe</span><input type="color" id="kitTrim" value="#ffffff"></label>
+        <label class="field"><span>Calção</span><input type="color" id="kitShorts" value="#0f2a5c"></label>
+        <label class="field"><span>Meias</span><input type="color" id="kitSocks" value="#bfdbfe"></label>
+        <label class="field"><span>Chuteira</span><input type="color" id="kitBoot" value="#facc15"></label>
+        <label class="field"><span>Estoque</span><input type="color" id="kitBoot2" value="#111827"></label>
+        <label class="field"><span>Pele</span><input type="color" id="kitSkin" value="#e0a97c"></label>
+        <label class="field"><span>Cabelo</span><input type="color" id="kitHair" value="#2b1a12"></label>
+        <label class="field field--wide"><span>Estampa</span>
+          <select id="kitStyle">
+            <option value="stripes">Listrado</option>
+            <option value="hoops">Horizontal</option>
+            <option value="plain">Liso</option>
+            <option value="sash">Faixa</option>
+            <option value="gradient">Degradê</option>
+          </select>
+        </label>
+      </div>
+      <div class="closet__actions">
+        <button class="btn btn--ghost" id="kitRandom" type="button">🎲 Aleatório</button>
+        <button class="btn btn--ghost" id="kitReset" type="button">↺ Padrão</button>
+      </div>
+    </section>
+
+    <footer class="hints">
+      <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / <kbd>setas</kbd> mover</span>
+      <span><kbd>Espaço</kbd> chutar / passar</span>
+      <span><kbd>Shift</kbd> carrinho</span>
+      <span><kbd>Q</kbd> trocar jogador</span>
+      <span><kbd>E</kbd> trocar local</span>
+      <span><kbd>R</kbd> reiniciar</span>
+    </footer>
+
+    <footer class="credits">
+      <span id="arenaName">Campo · grama</span>
+      · Criado por <strong>Bernardo</strong>, <strong>Helena</strong>, <strong>Arthur</strong> e <strong>João</strong>
+      · <a href="https://larandreluizinfo.github.io/bjah_lar_261002/">jogar no site</a>
+      · <a href="https://github.com/larandreluizinfo/bjah_lar_261002">código</a>
+    </footer>
+  </div>
+
+  <script src="js/game.js"></script>
 </body>
 </html>
