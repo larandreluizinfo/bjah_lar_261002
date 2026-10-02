@@ -126,7 +126,7 @@
       outdoor: true,
       boards: false,
       seed: 20261002,
-      bounds: { l: 142, r: 818, t: 80, b: 480 },
+      bounds: { l: 186, r: 774, t: 112, b: 436 },
       goalW: 116, goalDepth: 26, ballR: 8,
       kick: 585, pass: 445, shot: 1.0
     },
@@ -137,7 +137,7 @@
       outdoor: false,
       boards: true,
       seed: 777001,
-      bounds: { l: 186, r: 774, t: 104, b: 456 },
+      bounds: { l: 232, r: 728, t: 150, b: 414 },
       goalW: 76, goalDepth: 11, ballR: 7,
       kick: 480, pass: 360, shot: 0.86
     }
@@ -731,8 +731,9 @@
     fx.length = 0;
     if (key === 'quadra') buildRain();
     else rain.length = 0;
-    document.getElementById('venueName').textContent = V.short;
-    Array.prototype.forEach.call(document.querySelectorAll('.venue'), function (b) {
+    var venueLabel = document.getElementById('venueName');
+    if (venueLabel) venueLabel.textContent = V.short;
+    Array.prototype.forEach.call(document.querySelectorAll('.venue, .arena'), function (b) {
       b.classList.toggle('is-active', b.dataset.venue === key);
     });
     if (state === 'demo') { build(); setupPositions(1); }
@@ -1035,6 +1036,31 @@
     if (Math.random() < 0.35) sound.post();
   }
 
+  /* disputa de bola: adversário colado no dono rouba a posse */
+  function contest(dt) {
+    var o = ball.owner;
+    if (!o) return;
+    var rival = null, bestD = 1e9;
+    for (var i = 0; i < players.length; i++) {
+      var q = players[i];
+      if (q.team === o.team || q.slide > 0 || q.stun > 0) continue;
+      var d = dist(q.x, q.y, o.x, o.y);
+      if (d < bestD) { bestD = d; rival = q; }
+    }
+    if (!rival || bestD > PLAYER_R + BALL_R + 9) {
+      ball.press = Math.max(0, (ball.press || 0) - dt * 0.9);
+      return;
+    }
+    var rate = (rival.gk ? 2.1 : 1.05) * (rival === controlled ? 1.25 : 1);
+    if (rival.sprint > 0) rate *= 1.3;
+    ball.press = (ball.press || 0) + dt * rate;
+    if (ball.press >= 0.5) {
+      ball.press = 0;
+      takePossession(rival);
+      puff(rival.x, rival.y, V.outdoor ? 'grass' : 'dust');
+    }
+  }
+
   function ballStep(dt) {
     if (ball.owner) {
       var o = ball.owner;
@@ -1042,6 +1068,7 @@
       ball.y = o.y + o.fy * (PLAYER_R + BALL_R + 2);
       ball.z = 0;
       ball.vx = o.vx; ball.vy = o.vy;
+      contest(dt);
       return;
     }
     ball.x += ball.vx * dt;
@@ -1329,6 +1356,7 @@
     venue: document.getElementById('venueName'),
     sound: document.getElementById('btnSound')
   };
+  if (el.sound) el.sound.textContent = sound.isMuted() ? '🔇' : '🔊';
   var hudKey = '';
 
   function syncHud(force) {
@@ -1373,7 +1401,7 @@
   });
   el.venue.addEventListener('click', toggleVenue);
   document.getElementById('btnVenue').addEventListener('click', toggleVenue);
-  el.sound.addEventListener('click', function () {
+  if (el.sound) el.sound.addEventListener('click', function () {
     sound.init();
     var m = !sound.isMuted();
     sound.setMuted(m);
@@ -1381,6 +1409,12 @@
     el.sound.classList.toggle('is-off', m);
   });
   Array.prototype.forEach.call(document.querySelectorAll('.venue'), function (b) {
+    b.addEventListener('click', function () {
+      sound.init();
+      setVenue(b.dataset.venue);
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.arena'), function (b) {
     b.addEventListener('click', function () {
       sound.init();
       setVenue(b.dataset.venue);
@@ -1394,6 +1428,11 @@
     var sel = document.getElementById('kitTeam');
     var panel = document.getElementById('closet');
     var btn = document.getElementById('btnCustom');
+    if (!sel || !panel) return;
+
+    if (!kit[sel.value]) sel.value = '1';
+    function team() { return kit[sel.value] ? sel.value : '1'; }
+
     var fields = {
       kitShirt: 'a', kitTrim: 'b', kitShorts: 'shorts', kitSocks: 'socks',
       kitBoot: 'boot', kitBoot2: 'boot2', kitSkin: 'skin', kitHair: 'hair'
@@ -1405,18 +1444,19 @@
       if (!el) return;
       inputs[id] = el;
       el.addEventListener('input', function () {
-        kit[sel.value][fields[id]] = el.value;
+        kit[team()][fields[id]] = el.value;
       });
     });
     var styleEl = document.getElementById('kitStyle');
     if (styleEl) {
       styleEl.addEventListener('change', function () {
-        kit[sel.value].style = styleEl.value;
+        kit[team()].style = styleEl.value;
       });
     }
 
     function loadTeam() {
-      var k = kit[sel.value];
+      var k = kit[team()];
+      if (!k) return;
       Object.keys(fields).forEach(function (id) {
         if (inputs[id]) inputs[id].value = k[fields[id]];
       });
@@ -1426,7 +1466,8 @@
 
     var rnd = document.getElementById('kitRandom');
     if (rnd) rnd.addEventListener('click', function () {
-      var k = kit[sel.value];
+      var k = kit[team()];
+      if (!k) return;
       var h = function () {
         return '#' + ('000000' + Math.floor(Math.random() * 0x1000000).toString(16)).slice(-6);
       };
@@ -1437,7 +1478,7 @@
     });
     var rst = document.getElementById('kitReset');
     if (rst) rst.addEventListener('click', function () {
-      kit[sel.value] = defaultKit(Number(sel.value));
+      kit[team()] = defaultKit(Number(team()));
       loadTeam();
     });
 
@@ -1907,13 +1948,15 @@
   bg = buildBackground(venueKey);
   build();
   setupPositions(1);
+  bindCloset();
   if (V.boards) buildRain();
   syncHud(true);
   requestAnimationFrame(frame);
 
   /* gancho de depuração (útil para testes automatizados) */
   window.__jogo = {
-    ball: ball, players: players,
+    ball: ball,
+    get players() { return players; },
     score: function () { return score.join('x'); },
     raw: { score: score },
     clock: function () { return clock; },

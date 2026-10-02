@@ -1,62 +1,60 @@
-# ⚽ Futebol de Rua
+# ⚽ Futebol de Rua — Campo & Quadra
 
-Jogo de futebol arcade em HTML5 + Canvas, sem dependências, rodando direto no GitHub Pages.
+Jogo de futebol arcade em HTML5 Canvas (5 contra 5), sem dependências.
+Você controla o **time azul**; o time vermelho joga com IA.
 
-🔗 **Jogue agora:** https://larandreluizinfo.github.io/bjah_lar_261002/
+🔗 **Jogue agora no GitHub Pages:** https://larandreluizinfo.github.io/bjah_lar_261002/
 
 ## Criadores
 
-**Bernardo, Helena, Arthur e João.**
+- Bernardo
+- Helena
+- Arthur
+- João
 
-## Locais
+## Praças
 
-| Local | Descrição |
+| Praça | Como é |
 | --- | --- |
-| 🏟️ **Campo** | Estádio de grama com arquibancadas lotadas, placas de LED, refletores, bandeirinhas e torcida. |
-| 🏀 **Quadra** | Ginásio de futsal: piso de madeira polida, tabelas (paredes) com rebote, meia-lua das áreas e arquibancadas. |
+| 🌿 **Campo** | Estádio de grama com arquibancadas, refletores e placas de publicidade. Laterais, escanteios e tiro de meta. |
+| 🏀 **Quadra** | Ginásio de futsal com piso de madeira, tabelas nas paredes (a bola rebate) e garoa. |
 
-Troque de local pelo botão no placar, pela tecla `E` ou escolhendo no menu inicial.
+Troque de local no botão **🏟️**, nas abas do placar ou com a tecla <kbd>E</kbd>.
 
-## Como jogar
-
-Você comanda o **time Azul** (o jogador com anel ciano). O controle passa automaticamente
-para quem está mais perto da bola — ou use `Q` para trocar na hora.
+## Controles
 
 | Tecla | Ação |
 | --- | --- |
-| `W` `A` `S` `D` / setas | mover |
-| `Espaço` | chutar, passar e finalizar (mira automática) |
-| `Shift` | carrinho (desarme) |
-| `Q` | trocar jogador controlado |
-| `E` | trocar entre campo e quadra |
-| `R` | reiniciar a partida |
+| <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / setas | mover |
+| <kbd>Espaço</kbd> | chutar / passar / tirar do gol |
+| <kbd>Shift</kbd> | carrinho (desarme) |
+| <kbd>Q</kbd> | trocar de jogador |
+| <kbd>E</kbd> | trocar de local |
+| <kbd>R</kbd> | reiniciar a partida |
 
-No celular aparecem joystick e botões de chute/carrinho.
+No celular aparece um joystick virtual e os botões de chute e carrinho.
 
-## Regras do jogo
+## 🎨 Closet — cores do mundo
 
-- 2 tempos de 45 segundos; o time que faz gol no campo de ataque troca de lado no intervalo.
-- No **campo**: lateral, escanteio e tiro de meta, com aviso na tela.
-- Na **quadra**: a bola rebate nas tabelas — só sai por cima delas.
-- Goleiros defendem o gol e chutam longo; chutes fortes não são dominados por jogador de linha.
-- Posse de bola, placar e cronômetro ficam sempre visíveis.
-- Ao abrir o jogo, uma **demonstração IA × IA** roda ao fundo do menu.
+No menu **🎨 Cores do time** dá para escolher **qualquer cor do espectro** (o seletor
+de cor do navegador abre o gamut RGB completo) para:
 
-## Recursos técnicos
+- camisa, detalhe/gola, calção e meias;
+- **chuteira** (cor do pé) e **estoque** (outro pé), desenhadas com solado e studs;
+- pele e cabelo;
+- estampa: listrado, horizontal, faixa, degradê ou liso.
 
-- Renderização em Canvas 2D com cenário pré-renderizado (grama com 5.000 tufos, madeira com veio, arquibancadas com público).
-- Bola com **altura real** (pneu, quique, sombra que diminui conforme sobe) e rastro de velocidade.
-- Uniformes com listras/faixas, cabeça, braços, pernas animadas e sombra projetada.
-- Partículas de grama/poeira, papel picado nos gols e garoa leve na quadra.
-- Áudio sintetizado na Web Audio API: torcida, apito, chute e trave.
-- Placar, cronômetro, intervalo e resultado final na HUD.
+Botões **🎲 Aleatório** (sorteia cores novas) e **↺ Padrão**.
 
-## Desenvolvimento
+## Como está feito
 
-```bash
-git add -A
-git commit -m "mensagem"
-git push origin main
+```
+index.html      estrutura da página e HUD
+css/style.css   estilos do placar, do closet e dos controles
+js/game.js      motor do jogo (física, IA, desenho em canvas, áudio)
 ```
 
-O GitHub Pages publica a branch `main` da raiz do repositório.
+- Física da bola com altura, quique, giro e rastro.
+- IA com marcação, posicionamento por setores, passes e finalizações.
+- Goleiros que defendem, saem do gol e seguram chutes fortes.
+- Torcida, refletores, bandeirinhas, placas, som (torcida, apito, chutes) e garoa na quadra.
