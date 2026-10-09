@@ -5,16 +5,16 @@ Você controla o **time azul**; o time vermelho joga com IA.
 
 🔗 **Jogue agora no GitHub Pages:** https://larandreluizinfo.github.io/bjah_lar_261002/
 
-## 🦘 Salto Triplo
+## 🤸 Salto com Vara
 
-Terceiro jogo do projeto (`salto.html`): corrida de aproximação e três saltos
-(um longo, um passo e o terceiro) para cair dentro da caixa de areia.
+Terceiro jogo do projeto (`salto.html`): corrida de aproximação, batida na
+caixa de planting, a vara curvando e a passagem por cima da barra.
 
-- Corra e bata na linha amarela; **Espaço** dá o 1º salto.
-- **Espaço** de novo no ar dá o passo e o 3º salto.
-- A força da barra (faixa amarela = ponto ideal) decide a altura e o alcance.
-- Vento aleatório ajuda ou atrapalha; a bandeira mostra o sentido.
-- Caiu fora da areia = salto inválido. Recorde fica salvo no navegador.
+- Corra e bata **Espaço** na caixa vermelha.
+- Quanto mais velocidade na chegada, mais energia a vara guarda e mais alto ele passa.
+- A linha verde tracejada mostra o topo do atleta: passe **acima** da barra.
+- A barra sobe de altura a cada acerto e o recorde fica salvo no navegador.
+- Vento aleatório empurra o atleta durante a subida.
 
 ## ✂️ Barbearia do Omen
 
