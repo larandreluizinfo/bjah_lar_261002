@@ -11,6 +11,7 @@ Você controla o **time azul**; o time vermelho joga com IA.
 - Helena
 - Arthur
 - João
+- Manuela
 
 ## Praças
 
