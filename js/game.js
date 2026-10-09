@@ -759,6 +759,7 @@
   }
 
   function setVenue(key) {
+    if (!VENUES[key]) return;                 // ignora cliques que não são de local
     venueKey = key;
     V = VENUES[key];
     F = V.bounds;
@@ -796,7 +797,9 @@
     W: 'up', S: 'down', A: 'left', D: 'right',
     ' ': 'kick', Shift: 'slide', q: 'switch', Q: 'switch',
     e: 'venue', E: 'venue', r: 'reset', R: 'reset', Enter: 'start',
-    f: 'diff1', F: 'diff1', n: 'diff2', N: 'diff2', d: 'diff3', D: 'diff3',
+    1: 'diff1', 2: 'diff2', 3: 'diff3',
+    F1: 'diff1', F2: 'diff2', F3: 'diff3',
+    '[': 'lvlDown', ']': 'lvlUp',
     v: 'versus', V: 'versus'
   };
 
@@ -809,12 +812,25 @@
   };
 
   function mapKey(map, e) {
+    if (!e) return null;
     if (e.code && map[e.code]) return map[e.code];
-    return map[e.key];
+    if (e.key && map[e.key]) return map[e.key];
+    if (e.code === 'Space' && map[' ']) return map[' '];
+    if (e.code && e.code.indexOf('Key') === 0) {
+      var d = e.code.slice(3).toLowerCase();
+      if (map[d]) return map[d];
+    }
+    return null;
+  }
+
+  /* no Versus as setas ficam com o jogador 2 */
+  function mapKeyP1(e) {
+    if (versus && e && e.code && e.code.indexOf('Arrow') === 0) return null;
+    return mapKey(KEYMAP, e);
   }
 
   window.addEventListener('keydown', function (e) {
-    var k = mapKey(KEYMAP, e);
+    var k = mapKeyP1(e);
     if (!k) {
       if (versus) {
         var k2 = mapKey(KEYMAP2, e);
@@ -837,12 +853,14 @@
     if (k === 'diff1') setDifficulty('facil');
     if (k === 'diff2') setDifficulty('normal');
     if (k === 'diff3') setDifficulty('dificil');
+    if (k === 'lvlDown') setLevel(level - 1);
+    if (k === 'lvlUp') setLevel(level + 1);
     if (k === 'reset') startMatch();
     if (k === 'start' && state !== 'play') startMatch();
     keys[k] = true;
   });
   window.addEventListener('keyup', function (e) {
-    var k = mapKey(KEYMAP, e);
+    var k = mapKeyP1(e);
     if (k) {
       if (k === 'kick') onKickUp(1);
       keys[k] = false;
@@ -1619,7 +1637,6 @@
     sound.init();
     if (state !== 'play') startMatch();
   });
-  el.venue.addEventListener('click', toggleVenue);
   document.getElementById('btnVenue').addEventListener('click', toggleVenue);
   if (el.sound) el.sound.addEventListener('click', function () {
     sound.init();
@@ -1628,13 +1645,13 @@
     el.sound.textContent = m ? '🔇' : '🔊';
     el.sound.classList.toggle('is-off', m);
   });
-  Array.prototype.forEach.call(document.querySelectorAll('.venue'), function (b) {
+  Array.prototype.forEach.call(document.querySelectorAll('.venue[data-venue]'), function (b) {
     b.addEventListener('click', function () {
       sound.init();
       setVenue(b.dataset.venue);
     });
   });
-  Array.prototype.forEach.call(document.querySelectorAll('.arena'), function (b) {
+  Array.prototype.forEach.call(document.querySelectorAll('.arena[data-venue]'), function (b) {
     b.addEventListener('click', function () {
       sound.init();
       setVenue(b.dataset.venue);
