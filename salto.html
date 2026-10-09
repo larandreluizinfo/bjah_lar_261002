@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>🦘 Salto Triplo — Jogo</title>
+<link rel="stylesheet" href="css/salto.css">
+</head>
+<body>
+  <div class="app">
+    <header class="hud">
+      <div class="hud-box">
+        <span class="label">Saltos</span>
+        <div class="pips">
+          <i class="pip" id="pip1">1</i>
+          <i class="pip" id="pip2">2</i>
+          <i class="pip" id="pip3">3</i>
+        </div>
+      </div>
+      <div class="hud-box">
+        <span class="label">Distância</span>
+        <strong id="distValue">0,00 m</strong>
+      </div>
+      <div class="hud-box">
+        <span class="label">Fase</span>
+        <strong id="phaseValue">Corrida de aproximação</strong>
+      </div>
+      <div class="hud-box">
+        <span class="label">Vento</span>
+        <strong id="windValue">0,0 m/s</strong>
+      </div>
+      <div class="hud-box">
+        <span class="label">Recorde</span>
+        <strong id="bestValue">0,00 m</strong>
+      </div>
+      <div class="hud-box">
+        <span class="label">Pontos</span>
+        <strong id="scoreValue">0</strong>
+      </div>
+    </header>
+
+    <main class="stage">
+      <canvas id="game" width="900" height="500"></canvas>
+
+      <div class="overlay" id="overlay">
+        <h1>🦘 Salto Triplo</h1>
+        <p>
+          São <strong>três saltos</strong>: um longo, um passo e o terceiro.<br>
+          Corra, bata na linha com o pé da frente, depois toque <strong>Espaço</strong>
+          no ar para dar o passo e mais uma vez para o terceiro salto.<br>
+          A queda precisa ser na <strong>caixa de areia</strong>.
+        </p>
+        <button id="startBtn">🏟️ Começar a prova</button>
+      </div>
+
+      <div class="result" id="result" hidden>
+        <strong id="resultTitle">—</strong>
+        <span id="resultText">—</span>
+        <button id="againBtn">🔁 Correr de novo</button>
+      </div>
+    </main>
+
+    <section class="controls">
+      <button id="jumpBtn" class="big">🦘 SALTAR <small>Espaço</small></button>
+      <div class="meter">
+        <span class="label">Força do salto</span>
+        <div class="bar"><i id="powerFill"></i><u id="powerMark"></u></div>
+      </div>
+      <button id="restartBtn">↺ Reiniciar <small>R</small></button>
+    </section>
+
+    <footer class="tips">
+      <span><kbd>Espaço</kbd> saltar</span>
+      <span>🎯 quanto mais perto da faixa amarela, mais longo o salto</span>
+      <span>💨 o vento ajuda ou atrapalha (seta mostra o sentido)</span>
+      <span>🟨 queda só vale dentro da areia</span>
+    </footer>
+  </div>
+
+  <script src="js/salto.js"></script>
+</body>
+</html>

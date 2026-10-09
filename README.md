@@ -5,6 +5,17 @@ Você controla o **time azul**; o time vermelho joga com IA.
 
 🔗 **Jogue agora no GitHub Pages:** https://larandreluizinfo.github.io/bjah_lar_261002/
 
+## 🦘 Salto Triplo
+
+Terceiro jogo do projeto (`salto.html`): corrida de aproximação e três saltos
+(um longo, um passo e o terceiro) para cair dentro da caixa de areia.
+
+- Corra e bata na linha amarela; **Espaço** dá o 1º salto.
+- **Espaço** de novo no ar dá o passo e o 3º salto.
+- A força da barra (faixa amarela = ponto ideal) decide a altura e o alcance.
+- Vento aleatório ajuda ou atrapalha; a bandeira mostra o sentido.
+- Caiu fora da areia = salto inválido. Recorde fica salvo no navegador.
+
 ## ✂️ Barbearia do Omen
 
 Segundo jogo do projeto (`barber.html`): você é o barbeiro e corta o cabelo dos
