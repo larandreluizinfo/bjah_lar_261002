@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>✂️ Barbearia do Omen</title>
+<link rel="stylesheet" href="css/barber.css">
+</head>
+<body>
+  <div class="app">
+    <header class="hud">
+      <div class="hud-box">
+        <span class="label">Cliente</span>
+        <strong id="clientName">—</strong>
+      </div>
+      <div class="hud-box">
+        <span class="label">Pedido</span>
+        <strong id="clientStyle">—</strong>
+      </div>
+      <div class="hud-box">
+        <span class="label">Dica</span>
+        <strong id="clientHint">—</strong>
+      </div>
+      <div class="hud-box">
+        <span class="label">Nota</span>
+        <strong id="scoreValue">—</strong>
+      </div>
+      <div class="hud-box">
+        <span class="label">Clientes</span>
+        <strong id="clientCount">0</strong>
+      </div>
+    </header>
+
+    <main class="stage">
+      <canvas id="game" width="900" height="560"></canvas>
+
+      <div class="verdict" id="verdict" hidden>
+        <strong id="verdictTitle">—</strong>
+        <span id="verdictText">—</span>
+      </div>
+
+      <div class="overlay" id="overlay">
+        <h1>✂️ Barbearia do Omen</h1>
+        <p>Corte o cabelo dos homens do jeito que eles pediram.<br>
+           Segure o botão do mouse e passe a ferramenta <strong>por cima</strong> do cabelo para encurtar.</p>
+        <button id="startBtn">🪒 Começar o expediente</button>
+      </div>
+    </main>
+
+    <section class="tools">
+      <button class="tool active" data-tool="scissors">
+        <span class="ico">✂️</span><strong>Tesoura</strong><small>fina · <kbd>1</kbd></small>
+      </button>
+      <button class="tool" data-tool="clipper">
+        <span class="ico">💈</span><strong>Máquina</strong><small>larga · <kbd>2</kbd></small>
+      </button>
+      <button class="tool" data-tool="razor">
+        <span class="ico">🪒</span><strong>Navalha</strong><small>raspa tudo · <kbd>3</kbd></small>
+      </button>
+      <div class="spacer"></div>
+      <button class="tool done" id="doneBtn"><span class="ico">✅</span><strong>Pronto</strong><small><kbd>Enter</kbd></small></button>
+    </section>
+
+    <footer class="tips">
+      <span>🖱️ Segure e arraste sobre o cabelo para cortar</span>
+      <span>📏 Verde = do tamanho certo · vermelho = grande/pequeno demais</span>
+      <span>🎯 Corte certinho = mais nota</span>
+      <span>💰 Cada cliente pago aumenta o caixa</span>
+    </footer>
+  </div>
+
+  <script src="js/barber.js"></script>
+</body>
+</html>

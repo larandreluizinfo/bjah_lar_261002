@@ -5,6 +5,16 @@ Você controla o **time azul**; o time vermelho joga com IA.
 
 🔗 **Jogue agora no GitHub Pages:** https://larandreluizinfo.github.io/bjah_lar_261002/
 
+## ✂️ Barbearia do Omen
+
+Segundo jogo do projeto (`barber.html`): você é o barbeiro e corta o cabelo dos
+homens do jeito que eles pedem.
+
+- Arraste a ferramenta por cima do cabelo para encurtar.
+- Ferramentas: <kbd>1</kbd> tesoura (fina), <kbd>2</kbd> máquina (larga), <kbd>3</kbd> navalha (raspa).
+- Verde = do tamanho certo, vermelho = fora do pedido.
+- <kbd>Enter</kbd> chama o próximo cliente. Cada corte vira nota e pagamento.
+
 ## Criadores
 
 - Bernardo
